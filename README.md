@@ -1,4 +1,4 @@
-# BullCheese
+# The Seed Dispensary
 A trusted third party for Minecraft Filtered Seed Glitchless speedrunning.
 
 ## Introduction
@@ -7,7 +7,7 @@ Filtered Seed Glitchless is intended as a middle ground between two other speedr
 
 The tricky part of FSG is the implementation. You can't allow runners to pick their own seed, as then FSG is no different than SSG. You can't have human beings dealing out seeds, as that's both impractical given the size of the Minecraft speedrunning community and ripe for abuse. And yet you still need some sort of verification framework in place to be a valid speedrun.
 
-BullCheese is a solution to the implementation puzzle. It is a simple [Flask](https://flask.palletsprojects.com/en/1.1.x/) application for handing out FSG seed "tickets", that give the holder a limited window to attempt a FSG run. If the runner desires to validate their run, they hand the seed they ran, the ticket they were given, and the server they got both from to a validator. The validator is able to use BullCheese to verify the seed was assigned by the server and the run was performed within a specific time window after it was assigned, with a high degree of confidence, and thus verify the runner was not practicing on that seed.
+The Seed Dispensary is a solution to the implementation puzzle. It is a simple [Flask](https://flask.palletsprojects.com/en/1.1.x/) application for handing out FSG seed "tickets", that give the holder a limited window to attempt a FSG run. If the runner desires to validate their run, they hand the seed they ran, the ticket they were given, and the server they got both from to a validator. The validator is then able to verify the seed was assigned by the server and the run was performed within a specific time window after it was assigned, with a high degree of confidence, and thus verify the runner was not practicing on that seed.
 
 It is designed to be quite flexible, as well. The server manager can tweak the size of the ticket, change how long the ticket is "live" for, and raise or lower the security of tickets. It can be easily adapted for tournaments, with custom seed pools swapped for the default ones. Validators can be permitted to verify tickets offline, without needing access to the server itself. The code is released under a [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license, so it can be forked and modified. Launching the server has been made as simple as possible, with secure defaults, so you can set up your own server with a few clicks.
 
@@ -55,11 +55,13 @@ That joke captures the essence of designing secure systems. You cannot make any 
 
 ## Deployment
 
-There are many ways to deploy BullCheese, but we suspect the two most popular will be the following:
+There are many ways to deploy the Seed Dispensary, but we suspect the two most popular will be the following:
 
 * *Random Key, Random Salt*: The only way to verify a ticket is via the server. No validator is able to forge a ticket, and unless the administrator is a skilled hacker even they are ignorant of these values. There's nobody to bribe. Everything depends on that server remaining alive, though; if it restarts, pretty much all previously-issued tickets will no longer verify. If it becomes inaccessible, no run can be verified.
 
 * *Fixed Key, Random Salt*: If the administrator tells validators the private key, they can decrypt the ticket without relying on the server. This allows for manual validation if the server restarts or goes offline. In the latter case, any ticket that has yet to die can be verified if the server comes back online. This does open the door for validators or the administrator to crash the server then forge a ticket, however.
 
 
-## .... "BullCheese?"
+## .... Didn't this repository have a different name?
+
+It did! Five years ago, I couldn't think of a good name and went with the first that crossed my mind. While [it was a cute choice](https://www.urbandictionary.com/define.php?term=bullcheese), when circling back to the project after all these years inspiration struck. Not necessarily _good_ inspiration, mind you, but the "Seed Dispensary" still feels like a net improvement.
